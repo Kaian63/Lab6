@@ -103,6 +103,43 @@ public class Colosseum {
      */
     public static Pokemon buildPokemon() {
         Pokemon returnPokemon = null;
+        int userinput = 0;
+        while (userinput > 3 || userinput < 1) {
+            System.out.println("Select from the following Pokemon types: \n " +
+                    "1 - Electric Pokemon \n 2 - Fire Pokemon \n 3 - Water Pokemon");
+            userinput = myScan.nextInt();
+        }
+        if (userinput == 1) {
+            returnPokemon.pokeType = Pokemon.PokemonType.ELECTRIC;
+        } else if (userinput == 2) {
+            returnPokemon.pokeType = Pokemon.PokemonType.FIRE;
+        } else {
+            returnPokemon.pokeType = Pokemon.PokemonType.WATER;
+        }
+        System.out.print("Please name your Pokemon: ");
+        returnPokemon.setName(myScan.next());
+        System.out.println("\nHow many hit points will it have? (1-50): ");
+        userinput = myScan.nextInt();
+        while (userinput < 1 || userinput > MAX_HIT_POINTS) {
+            System.out.print("\nSorry. Hit points must be between 1 and 50: ");
+            userinput = myScan.nextInt();
+        }
+        returnPokemon.setHitPoints(userinput);
+        System.out.println("\nSplit fifty points between attack level and defense level");
+        System.out.print("Enter your attack level (1-49): ");
+        userinput = myScan.nextInt();
+        while (userinput < 1 || userinput > MAX_HIT_POINTS - 1) {
+            System.out.print("\nSorry. The attack level must be between 1 and 49: ");
+            userinput = myScan.nextInt();
+        }
+        returnPokemon.setAttackLevel(userinput);
+        System.out.print("\nEnter your defense level (1-" + (MAX_HIT_POINTS - returnPokemon.getAttackLevel()) + ": ");
+        userinput = myScan.nextInt();
+        while (userinput < 1 || userinput > MAX_HIT_POINTS - returnPokemon.getAttackLevel()) {
+            System.out.print("\nSorry. the defense level must be between 1 and " + (MAX_HIT_POINTS - returnPokemon.getAttackLevel()) + ": ");
+            userinput = myScan.nextInt();
+        }
+        returnPokemon.setDefenseLevel(userinput);
         return returnPokemon;
     }
 
